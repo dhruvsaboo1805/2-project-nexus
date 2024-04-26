@@ -14,7 +14,7 @@ const Login = () => {
     const [password, setPassword] = useState("");
     const [value, setvalue] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
-
+    const [isErrorShown, setIsErrorShown] = useState(false); // Track if error toast has been shown
     const navigate = useNavigate();
 
     const handleClick = () => {
@@ -23,40 +23,38 @@ const Login = () => {
 
     const handleLoginSubmit = (e) => {
         e.preventDefault();
-        
         if (password.length < 6) {
-            toast.error("Password should be at least 6 characters long");
+            toast.error("Password should be at least 6 characters long", { id: "password-length-error" });
             return;
         }
-
-        signInWithEmailAndPassword(database, email, password).then(data => {
-            navigate("/home");
-        }).catch(err => {
-            if (err.code === "auth/invalid-credential") {
-                setErrorMessage("Invalid credentials. Please try again.");
-            } else {
-                setErrorMessage(err.message); // For other errors
-            }
-            setEmail("");
-            setPassword("");
-        })
-
+        signInWithEmailAndPassword(database, email, password)
+            .then(data => {
+                navigate("/home");
+            }).catch(err => {
+                if (!isErrorShown && err.code === "auth/invalid-credential") {
+                    setIsErrorShown(true);
+                    setErrorMessage("Invalid credentials. Please try again.");
+                } else {
+                    setErrorMessage(err.message); // For other errors
+                }
+                setEmail("");
+                setPassword("");
+            });
     }
 
     const handleSignUpSubmit = (e) => {
         e.preventDefault();
-        
         if (password.length < 6) {
-            toast.error("Password should be at least 6 characters long");
+            toast.error("Password should be at least 6 characters long", { id: "password-length-error" });
             return;
         }
-
         createUserWithEmailAndPassword(database, email, password)
             .then(() => {
                 navigate("/home");
             })
             .catch((err) => {
-                if (err.code === "auth/invalid-credential") {
+                if (!isErrorShown && err.code === "auth/invalid-credential") {
+                    setIsErrorShown(true);
                     setErrorMessage("Invalid credentials. Please try again.");
                 } else if (err.code === "auth/email-already-in-use") {
                     setErrorMessage("This email is already in use. Please use a different email.");
@@ -75,7 +73,8 @@ const Login = () => {
             navigate("/home");
         })
             .catch((err) => {
-                if (err.code === "auth/invalid-credential") {
+                if (!isErrorShown && err.code === "auth/invalid-credential") {
+                    setIsErrorShown(true);
                     setErrorMessage("Invalid credentials. Please try again.");
                 } else {
                     setErrorMessage(err.message); // For other errors
@@ -103,12 +102,11 @@ const Login = () => {
         return () => unsubscribe();
     }, []);
 
-
     return (
         <div>
-            {errorMessage && (
-                toast.error(errorMessage)
-            )}
+           {isErrorShown && errorMessage && errorMessage.id !== "auth-error" && (
+            toast.error(errorMessage, { id: "auth-error" })
+        )}
             <div className={loginactive ? "cantainer active" : "cantainer"}>
                 <div className="curved-shape"></div>
                 <div className="curved-shape2"></div>
@@ -176,7 +174,7 @@ const Login = () => {
                         </div>
                         <div className="input-box animation">
                             <input type="password" value={password} onChange={(e) => { setPassword(e.target.value) }} required />
-                            <label for="">Password</label>
+                            <label htmlFor="">Password</label>
                             <FaLock className="Login-icons" />
                         </div>
                         <div className="input-box animation">
