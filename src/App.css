@@ -13,6 +13,38 @@ body {
   background-color: #25252b;
 }
 
+.error-popup {
+  position: fixed;
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #f8dba2;
+  padding: 20px;
+  border: 1px solid #ff6666;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  z-index: 1000; /* Ensure it appears on top of other content */
+}
+
+.error-popup p {
+  margin: 0;
+  color: #ff0000;
+}
+
+.error-popup button {
+  background-color: #ff6666;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.error-popup button:hover {
+  background-color: #ff4d4d;
+}
+
 .cantainer {
   position: relative;
   width: 750px;
@@ -158,6 +190,7 @@ body {
   height: 30px;
   background-color: #25252b;
   border: 1px solid #ffa500;
+  cursor: pointer;
 }
 
 

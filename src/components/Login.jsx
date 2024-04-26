@@ -1,46 +1,118 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaLock, FaUser } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { FaGoogle } from "react-icons/fa";
 import { FaFacebookF } from "react-icons/fa";
-import axios from "axios";
-import { database } from "FirebaseConfig";
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { database, provider, fbAuthProvider } from "../FirebaseConfig";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, onAuthStateChanged } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Login = () => {
     const [loginactive, setLoginActive] = useState(false);
-    const [username , setUserName] = useState("");
-    // const [email , setEmail] = useState("");
-    const [password , setPassword] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [value, setvalue] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
+
+    const navigate = useNavigate();
 
     const handleClick = () => {
         setLoginActive((curr) => !curr);
     };
 
-    const handleSubmit = (e)=> {
+    const handleLoginSubmit = (e) => {
         e.preventDefault();
 
-        createUserWithEmailAndPassword(database , username , password).then(data => {
-            console.log(data , "authdata");
+        signInWithEmailAndPassword(database, email, password).then(data => {
+            navigate("/home");
+        }).catch(err => {
+            if (err.code === "auth/invalid-credential") {
+                // setErrorMessage("Invalid credentials. Please try again.");
+                toast.success("Invalid credentials. Please try again.");
+            } else {
+                setErrorMessage(err.message); // For other errors
+            }
+            setEmail("");
+            setPassword("");
         })
-        
+
     }
+
+    const handleSignUpSubmit = (e) => {
+        e.preventDefault();
+
+        createUserWithEmailAndPassword(database, email, password)
+            .then(() => {
+                navigate("/home");
+            })
+            .catch((err) => {
+                if (err.code === "auth/invalid-credential") {
+                    toast.error("Invalid credentials. Please try again.");
+                } else {
+                    setErrorMessage(err.message); // For other errors
+                }
+                setEmail("");
+                setPassword("");
+            });
+    }
+
+    const handleClickGoogleAuth = () => {
+        signInWithPopup(database, provider).then((data) => {
+            setvalue(data.user.email);
+            localStorage.setItem("email", data.user.email);
+            navigate("/home");
+        })
+            .catch((err) => {
+                if (err.code === "auth/invalid-credential") {
+                    toast.error("Invalid credentials. Please try again.");
+                } else {
+                    setErrorMessage(err.message); // For other errors
+                }
+                setEmail("");
+                setPassword("");
+            });
+    }
+
+    const handleFacebookAuth = () => {
+        fbAuthProvider.setCustomParameters({ display: 'popup' });
+        const user = signInWithPopup(database, fbAuthProvider);
+        navigate("/home");
+    }
+
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(database, (user) => {
+            if (user) {
+                setvalue(user.email);
+            } else {
+                setvalue(null);
+            }
+        });
+
+        return () => unsubscribe();
+    }, []);
 
     return (
         <div>
+            {/* {errorMessage && (
+                <div className="error-popup">
+                    <p>{errorMessage}</p>
+                    <button onClick={() => setErrorMessage("")}>Close</button>
+                </div>
+            )} */}
             <div className={loginactive ? "cantainer active" : "cantainer"}>
                 <div className="curved-shape"></div>
                 <div className="curved-shape2"></div>
                 <div className="form-box Login">
                     <h2 className="animation">Login</h2>
-                    <form className="cc" style={{ width: "100%" }} onSubmit={handleSubmit}>
+                    <form className="cc" style={{ width: "100%" }} onSubmit={handleLoginSubmit}>
                         <div className="input-box animation">
-                            <input type="text" onChange={(e) => {setUserName(e.target.value)}} required />
-                            <label htmlFor="c">Username</label>
-                            <FaUser style={{ color: "red" }} className="Login-icons" />
+                            <input type="email" value={email} onChange={(e) => { setEmail(e.target.value) }} required />
+                            <label htmlFor="c">Email</label>
+                            <MdEmail className="Login-icons" />
                         </div>
                         <div className="input-box animation">
-                            <input type="text" onChange={(e) => {setPassword(e.target.value)}} required />
+                            <input type="password" value={password} onChange={(e) => { setPassword(e.target.value) }} required />
                             <label htmlFor="hh">Password</label>
                             <FaLock className="Login-icons" />
                         </div>
@@ -51,10 +123,13 @@ const Login = () => {
                                 <div className="line"></div>
                             </div>
                             <div className="or-login-icons">
-                                <button className="login-btn">
-                                    <FaGoogle></FaGoogle>
-                                </button>
-                                <button className="login-btn">
+                                {!value && (
+                                    <button className="login-btn" onClick={handleClickGoogleAuth}>
+                                        <FaGoogle />
+                                    </button>
+                                )}
+
+                                <button className="login-btn" onClick={handleFacebookAuth}>
                                     <FaFacebookF className="fb-icon"></FaFacebookF>
                                 </button>
                             </div>
@@ -84,19 +159,14 @@ const Login = () => {
                 {/* sign up form */}
                 <div style={!loginactive ? { pointerEvents: "none" } : {}} className="form-box Register ">
                     <h2 className="animation">Sign Up</h2>
-                    <form className="df" onSubmit={handleSubmit}>
+                    <form className="df" onSubmit={handleSignUpSubmit}>
                         <div className="input-box animation">
-                            <input type="text"  required />
-                            <label htmlFor="b">Username</label>
-                            <FaUser className="Login-icons" />
-                        </div>
-                        <div className="input-box animation">
-                            <input type="email" required />
+                            <input type="email" value={email} onChange={(e) => { setEmail(e.target.value) }} required />
                             <label htmlFor="b">Email</label>
                             <MdEmail className="Login-icons" />
                         </div>
                         <div className="input-box animation">
-                            <input type="text" required />
+                            <input type="password" value={password} onChange={(e) => { setPassword(e.target.value) }} required />
                             <label for="">Password</label>
                             <FaLock className="Login-icons" />
                         </div>
