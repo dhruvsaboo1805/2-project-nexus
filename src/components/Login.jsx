@@ -6,7 +6,7 @@ import { FaFacebookF } from "react-icons/fa";
 import { database, provider, fbAuthProvider } from "../FirebaseConfig";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, onAuthStateChanged } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import toast from "react-hot-toast";
 
 const Login = () => {
     const [loginactive, setLoginActive] = useState(false);
@@ -23,13 +23,17 @@ const Login = () => {
 
     const handleLoginSubmit = (e) => {
         e.preventDefault();
+        
+        if (password.length < 6) {
+            toast.error("Password should be at least 6 characters long");
+            return;
+        }
 
         signInWithEmailAndPassword(database, email, password).then(data => {
             navigate("/home");
         }).catch(err => {
             if (err.code === "auth/invalid-credential") {
-                // setErrorMessage("Invalid credentials. Please try again.");
-                toast.success("Invalid credentials. Please try again.");
+                setErrorMessage("Invalid credentials. Please try again.");
             } else {
                 setErrorMessage(err.message); // For other errors
             }
@@ -41,6 +45,11 @@ const Login = () => {
 
     const handleSignUpSubmit = (e) => {
         e.preventDefault();
+        
+        if (password.length < 6) {
+            toast.error("Password should be at least 6 characters long");
+            return;
+        }
 
         createUserWithEmailAndPassword(database, email, password)
             .then(() => {
@@ -48,7 +57,9 @@ const Login = () => {
             })
             .catch((err) => {
                 if (err.code === "auth/invalid-credential") {
-                    toast.error("Invalid credentials. Please try again.");
+                    setErrorMessage("Invalid credentials. Please try again.");
+                } else if (err.code === "auth/email-already-in-use") {
+                    setErrorMessage("This email is already in use. Please use a different email.");
                 } else {
                     setErrorMessage(err.message); // For other errors
                 }
@@ -65,7 +76,7 @@ const Login = () => {
         })
             .catch((err) => {
                 if (err.code === "auth/invalid-credential") {
-                    toast.error("Invalid credentials. Please try again.");
+                    setErrorMessage("Invalid credentials. Please try again.");
                 } else {
                     setErrorMessage(err.message); // For other errors
                 }
@@ -92,14 +103,12 @@ const Login = () => {
         return () => unsubscribe();
     }, []);
 
+
     return (
         <div>
-            {/* {errorMessage && (
-                <div className="error-popup">
-                    <p>{errorMessage}</p>
-                    <button onClick={() => setErrorMessage("")}>Close</button>
-                </div>
-            )} */}
+            {errorMessage && (
+                toast.error(errorMessage)
+            )}
             <div className={loginactive ? "cantainer active" : "cantainer"}>
                 <div className="curved-shape"></div>
                 <div className="curved-shape2"></div>
