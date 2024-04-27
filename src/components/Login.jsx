@@ -86,9 +86,19 @@ const Login = () => {
 
     const handleFacebookAuth = () => {
         fbAuthProvider.setCustomParameters({ display: 'popup' });
-        signInWithPopup(database, fbAuthProvider);
-        navigate("/home");
+        signInWithPopup(database, fbAuthProvider)
+            .then((userCredential) => {
+                // Authentication successful, navigate to the homepage
+                navigate("/home");
+            })
+            .catch((error) => {
+                // Handle any errors that occur during authentication
+                console.error("Facebook authentication error:", error);
+                // Optionally, display an error message to the user
+                toast.error("Failed to authenticate with Facebook. Please try again.");
+            });
     }
+    
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(database, (user) => {
