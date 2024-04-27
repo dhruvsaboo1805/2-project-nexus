@@ -86,7 +86,7 @@ const Login = () => {
 
     const handleFacebookAuth = () => {
         fbAuthProvider.setCustomParameters({ display: 'popup' });
-        const user = signInWithPopup(database, fbAuthProvider);
+        signInWithPopup(database, fbAuthProvider);
         navigate("/home");
     }
 
