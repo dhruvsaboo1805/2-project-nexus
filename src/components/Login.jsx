@@ -114,9 +114,9 @@ const Login = () => {
 
     return (
         <div>
-           {isErrorShown && errorMessage && errorMessage.id !== "auth-error" && (
-            toast.error(errorMessage, { id: "auth-error" })
-        )}
+           {isErrorShown && errorMessage && (
+            toast.error(errorMessage) 
+        ) && setIsErrorShown(false)}
             <div className={loginactive ? "cantainer active" : "cantainer"}>
                 <div className="curved-shape"></div>
                 <div className="curved-shape2"></div>
