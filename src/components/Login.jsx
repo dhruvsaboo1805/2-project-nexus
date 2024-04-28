@@ -7,6 +7,7 @@ import { database, provider, fbAuthProvider } from "../FirebaseConfig";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, onAuthStateChanged } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import "./Login.css";
 
 const Login = () => {
     const [loginactive, setLoginActive] = useState(false);
@@ -29,7 +30,7 @@ const Login = () => {
         }
         signInWithEmailAndPassword(database, email, password)
             .then(data => {
-                navigate("/home");
+                navigate("/");
             }).catch(err => {
                 if (!isErrorShown && err.code === "auth/invalid-credential") {
                     setIsErrorShown(true);
@@ -50,7 +51,7 @@ const Login = () => {
         }
         createUserWithEmailAndPassword(database, email, password)
             .then(() => {
-                navigate("/home");
+                navigate("/");
             })
             .catch((err) => {
                 if (!isErrorShown && err.code === "auth/invalid-credential") {
@@ -70,7 +71,7 @@ const Login = () => {
         signInWithPopup(database, provider).then((data) => {
             setvalue(data.user.email);
             localStorage.setItem("email", data.user.email);
-            navigate("/home");
+            navigate("/");
         })
             .catch((err) => {
                 if (!isErrorShown && err.code === "auth/invalid-credential") {
@@ -89,7 +90,7 @@ const Login = () => {
         signInWithPopup(database, fbAuthProvider)
             .then((userCredential) => {
                 // Authentication successful, navigate to the homepage
-                navigate("/home");
+                navigate("/");
             })
             .catch((error) => {
                 // Handle any errors that occur during authentication
@@ -113,7 +114,7 @@ const Login = () => {
     }, []);
 
     return (
-        <div>
+        <div className="Login-screen">
            {isErrorShown && errorMessage && (
             toast.error(errorMessage) 
         ) && setIsErrorShown(false)}
