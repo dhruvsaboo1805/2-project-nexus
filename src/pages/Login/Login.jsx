@@ -54,12 +54,12 @@ const Login = ({setIsFooterVisible , setIsNavbarVisible}) => {
                 navigate("/");
             })
             .catch((err) => {
-                if (!isErrorShown && err.code === "auth/invalid-credential") {
+                if (!isErrorShown && err.code === "auth/email-already-in-use") {
                     setIsErrorShown(true);
-                    setErrorMessage("Invalid credentials. Please try again.");
-                } else if (err.code === "auth/email-already-in-use") {
                     setErrorMessage("This email is already in use. Please use a different email.");
-                } else {
+                } else if (!isErrorShown && err.code === "auth/invalid-credential") {
+                    setErrorMessage("Invalid credentials. Please try again.");
+                }else {
                     setErrorMessage(err.message); // For other errors
                 }
                 setEmail("");
