@@ -1,29 +1,40 @@
 import React from 'react';
 import './App.css';
-import Login from './components/Login';
+import Login from './pages/Login/Login';
 import { Routes, Route } from "react-router-dom"
 import Home from "./pages/Home/Home";
-import { database } from './FirebaseConfig';
-import { useNavigate } from "react-router-dom";
-import { signOut } from 'firebase/auth';
 import Cart from "./pages/Cart/Cart";
 import PlaceOrder from "./pages/PlaceOrder/PlaceOrder";
 import Footer from "./components/Footer/Footer";
 import Navbar from "./components/Navbar/Navbar";
+import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
 function App() {
+
+  const [isNavbarVisible, setIsNavbarVisible] = useState(true);
+  const [isFooterVisible, setIsFooterVisible] = useState(true);
+  const location = useLocation();
+
+  const toggleNavbarVisibility = (isVisible) => {
+    setIsNavbarVisible(isVisible);
+    setIsFooterVisible(isVisible);
+  }
+
+
   return (
     <>
-      <div className='app'>
-        <Navbar/>
+      <div className={`app ${location.pathname === '/login' ? 'login-page' : 'homepage'}`}>
+        <Navbar  isNavbarVisible={isNavbarVisible}
+          toggleNavbarVisibility={toggleNavbarVisibility}/>
         <Routes>
           <Route path="/" element={<Home></Home>}></Route>
-          <Route path="/login" element={<Login></Login>}></Route>
+          <Route path="/login" element={<Login setIsNavbarVisible = {setIsNavbarVisible} setIsFooterVisible = {setIsFooterVisible}></Login>}></Route>
           <Route path="/cart" element={<Cart />} />
           <Route path="/order" element={<PlaceOrder />} />
         </Routes>
       </div>
-      <Footer />
+      <Footer isFooterVisible={isFooterVisible} />
     </>
   );
 }

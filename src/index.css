@@ -9,10 +9,7 @@
 }
 
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-      sans-serif;
+  background-color: white;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   min-height: 100vh;
@@ -30,13 +27,17 @@ code {
   --gray: #676767;
 }
 
-
-body {
+.app {
  
 }
 
-.app {
-  width: 80%;
+.homepage {
+  width: 85%;
+  margin: auto;
+}
+
+.login-page {
+  width: 100%;
   margin: auto;
 }
 

@@ -275,7 +275,7 @@
   .info-content.Register {
     left: 0;
     text-align: left;
-    padding: 0 150px 60px 40px;
+    padding: 0 150px 60px 39px;
     pointer-events: none;
   }
   
@@ -338,6 +338,21 @@
   
   /* * Media Queries for Responsive Design */
   
+  @media screen and (min-width: 0px) and (max-width : 100px)
+  {
+    .line {
+      width: 30px;
+    }
+  
+    .additonal-login p {
+      font-size: 10px;
+      margin-left: 2px;
+    }
+  
+    .login-btn {
+      width: 50px;
+    }
+  }
   @media screen and (min-width: 100px) and (max-width: 401px) {
     .cantainer {
       width: 350px;

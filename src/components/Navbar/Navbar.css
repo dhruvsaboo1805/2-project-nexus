@@ -1,12 +1,11 @@
 .navbar {
-  padding: 20px 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
 .navbar .logo {
-  width: 150px;
+  width: 120px;
 }
 
 .navbar-menu {
@@ -71,6 +70,10 @@
 }
 
 .navbar-basket-icon .dotHidden {
+  display: none;
+}
+
+.hidden {
   display: none;
 }
 

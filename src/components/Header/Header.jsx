@@ -4,7 +4,6 @@ import "./Header.css";
 const Header = () => {
   return (
     <header>
-      <img src="https://www.canva.com/design/DAGDsdboluY/yTeo_jX2h1NQu-qu-oohOw/view" alt="food" className="food-img"/>
       <div className="header-contents">
         <h2>Order Your Favourite Food Here</h2>
         <p>

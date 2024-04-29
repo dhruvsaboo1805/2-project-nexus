@@ -3,13 +3,13 @@ import { FaLock, FaUser } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { FaGoogle } from "react-icons/fa";
 import { FaFacebookF } from "react-icons/fa";
-import { database, provider, fbAuthProvider } from "../FirebaseConfig";
+import { database, provider, fbAuthProvider } from "../../FirebaseConfig";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, onAuthStateChanged } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import "./Login.css";
 
-const Login = () => {
+const Login = ({setIsFooterVisible , setIsNavbarVisible}) => {
     const [loginactive, setLoginActive] = useState(false);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -105,6 +105,8 @@ const Login = () => {
         const unsubscribe = onAuthStateChanged(database, (user) => {
             if (user) {
                 setvalue(user.email);
+                setIsFooterVisible(true);
+                setIsNavbarVisible(true);
             } else {
                 setvalue(null);
             }

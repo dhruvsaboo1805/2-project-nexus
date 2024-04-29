@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState , useEffect } from "react";
 import { StoreContext } from "../../context/StoreContext";
 import "./Navbar.css";
 import { assets } from "../../assets/assets";
@@ -7,22 +7,47 @@ import { database } from "../../FirebaseConfig";
 import { useNavigate } from "react-router-dom";
 import { signOut } from 'firebase/auth';
 
-const Navbar = () => {
+
+const Navbar = ({ isNavbarVisible, toggleNavbarVisibility }) => {
   const { getTotalQuantity } = useContext(StoreContext);
   const totalQuantity = getTotalQuantity();
 
   const [menu, setMenu] = useState("home");
-
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const navigate = useNavigate();
+  
+
+  useEffect(() => {
+    // Check if the user is authenticated
+    const unsubscribe = database.onAuthStateChanged((user) => {
+      setIsAuthenticated(!!user); // Set isAuthenticated based on whether user exists
+    });
+    return unsubscribe; // Cleanup function
+  }, []);
 
   const handleClick = () => {
-    signOut(database).then(val => {
+    toggleNavbarVisibility(false);
+    if (isAuthenticated) {
+      // If user is authenticated, sign out
+      signOut(database)
+        .then(() => {
+          setIsAuthenticated(false); // Set isAuthenticated to false after sign out
+          toggleNavbarVisibility(true); 
+          navigate("/"); // Navigate to home page after sign out
+        })
+        .catch((error) => {
+          console.error("Error signing out:", error);
+        });
+    } else {
+      // If user is not authenticated, navigate to login page
       navigate("/login");
-    })
+    }
   }
 
+
+
   return (
-    <div className="navbar">
+    <div className={`navbar ${isNavbarVisible ? "" : "hidden"}`}>
       <Link to="/">
         <img src={assets.logo} alt="logo" className="logo" />
       </Link>
@@ -46,7 +71,7 @@ const Navbar = () => {
           onClick={() => setMenu("mobile-app")}
           className={menu === "mobile-app" ? "active" : ""}
         >
-          Mobile App
+          About Us
         </a>
         <a
           href="#footer"
@@ -66,7 +91,9 @@ const Navbar = () => {
             <p>{totalQuantity}</p>
           </div>
         </div>
-        <button onClick={handleClick}>Sign in</button>
+        <button onClick={handleClick}>
+          {isAuthenticated ? "Sign Out" : "Sign In"}
+        </button>
       </div>
     </div>
   );

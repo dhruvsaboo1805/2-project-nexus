@@ -3,10 +3,10 @@ import "./Footer.css";
 import { assets } from "../../assets/assets";
 import { useNavigate } from "react-router-dom";
 
-const Footer = () => {
+const Footer = ({isFooterVisible}) => {
   const navigate = useNavigate();
   return (
-    <footer id="footer">
+    <footer className= {`footer ${isFooterVisible ? "" : "hidden"}`}>
       <div className="footer-content">
         <div className="footer-content-left">
           <img src={assets.logo} alt="logo" />

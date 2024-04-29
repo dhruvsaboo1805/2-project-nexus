@@ -1,7 +1,7 @@
 header {
   height: 34vw;
   margin: 30px auto;
-  background: url("");
+  background: url("https://www.shutterstock.com/image-photo/background-cooking-tagliatelle-pasta-ingredients-260nw-1724611486.jpg");
   background-size: cover;
   position: relative;
   border-radius: 24px;
@@ -26,7 +26,7 @@ header {
 }
 
 .header-contents h2 {
-  font-weight: 500;
+  font-weight: 600;
   color: #fff;
   font-size: max(3.9vw, 22px);
   text-shadow: 4px 4px 4px #00000030;
