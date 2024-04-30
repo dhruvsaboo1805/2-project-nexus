@@ -9,6 +9,7 @@ import Footer from "./components/Footer/Footer";
 import Navbar from "./components/Navbar/Navbar";
 import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import Error from './pages/Error/Error';
 
 function App() {
 
@@ -32,6 +33,7 @@ function App() {
           <Route path="/login" element={<Login setIsNavbarVisible = {setIsNavbarVisible} setIsFooterVisible = {setIsFooterVisible}></Login>}></Route>
           <Route path="/cart" element={<Cart />} />
           <Route path="/order" element={<PlaceOrder />} />
+          <Route path = "*" element = {<Error></Error>}></Route>
         </Routes>
       </div>
       <Footer isFooterVisible={isFooterVisible} />
