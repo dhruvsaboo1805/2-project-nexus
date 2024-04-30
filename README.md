@@ -51,7 +51,7 @@ In order to run this project you need:
 
 Clone this repository to your desired folder:
 <code>
-  git clone https://github.com/dhruvsaboo1805/1-project-nexus.git
+  git clone https://github.com/dhruvsaboo1805/2-project-nexus.git
 </code>
 
 
