@@ -6,25 +6,19 @@ import { useNavigate } from "react-router-dom";
 const Footer = ({isFooterVisible}) => {
   const navigate = useNavigate();
   return (
-    <footer className= {`footer ${isFooterVisible ? "" : "hidden"}`}>
+    <footer className= {`footer ${isFooterVisible ? "" : "hidden"}`} id="footer">
       <div className="footer-content">
         <div className="footer-content-left">
-          <img src={assets.logo} alt="logo" />
+          <img src={assets.logo_dark} alt="logo" className="brand-logo"/>
           <p>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fugit
-            ratione fugiat vitae quisquam dolores sint id, nisi veniam
-            repellendus. Tempore, expedita. At praesentium deserunt minima!
-            Porro iste beatae maxime voluptatem?
+          Your restaurant's mission or brief description can go here. Let customers know what sets your restaurant apart.
           </p>
           <div className="footer-social-icons">
-            <a href="https://www.facebook.com">
+            <a href="#">
               <img src={assets.facebook_icon} alt="facebook" />
             </a>
-            <a href="https://www.twitter.com">
+            <a href="#">
               <img src={assets.twitter_icon} alt="twitter" />
-            </a>
-            <a href="https://www.linkedin.com">
-              <img src={assets.linkedin_icon} alt="linkedin" />
             </a>
           </div>
         </div>
@@ -41,12 +35,12 @@ const Footer = ({isFooterVisible}) => {
           <h2>GET IN TOUCH</h2>
           <ul>
             <li>+1-123-456-7890</li>
-            <li>contact@tomato.com</li>
+            <li>contact@Cooking.com</li>
           </ul>
         </div>
       </div>
       <hr />
-      <p className="footer-copyright">Copyright 2024 © Tomato.com</p>
+      <p className="footer-copyright">Copyright 2024 © Cooking.com</p>
     </footer>
   );
 };

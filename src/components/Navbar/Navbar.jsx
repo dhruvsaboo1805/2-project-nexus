@@ -67,14 +67,14 @@ const Navbar = ({ isNavbarVisible, toggleNavbarVisibility }) => {
           Menu
         </a>
         <a
-          href="#app-download"
+          href="#footer"
           onClick={() => setMenu("mobile-app")}
           className={menu === "mobile-app" ? "active" : ""}
         >
           About Us
         </a>
         <a
-          href="#footer"
+          href="#Contact-Us"
           onClick={() => setMenu("contact-us")}
           className={menu === "contact-us" ? "active" : ""}
         >

@@ -21,12 +21,12 @@ const Cart = () => {
     <div className="cart">
       <div className="cart-items">
         <div className="cart-items-title cart-heading">
-          <p>Items</p>
-          <p>Title</p>
-          <p>Price</p>
-          <p>Quantity</p>
-          <p>Total</p>
-          <p>Remove</p>
+          <p className="tags">Items</p>
+          <p className="tags">Title</p>
+          <p className="tags">Price</p>
+          <p className="tags">Quantity</p>
+          <p className="tags">Total</p>
+          <p className="tags">Remove</p>
         </div>
         <br />
         <hr />
@@ -42,10 +42,10 @@ const Cart = () => {
                     key={item._id}
                   >
                     <img src={item.image} alt="food img" />
-                    <p>{item.name}</p>
-                    <p>${item.price}</p>
-                    <p>{cartItems[item._id]}</p>
-                    <p>${item.price * cartItems[item._id]}</p>
+                    <p className=" tags-cart">{item.name}</p>
+                    <p className=" tags-cart">₹{item.price}</p>
+                    <p className=" tags-cart">{cartItems[item._id]}</p>
+                    <p className=" tags-cart">₹{item.price * cartItems[item._id]}</p>
                     <p
                       className="Remove"
                       onClick={() => removeFromCart(item._id)}
@@ -65,22 +65,22 @@ const Cart = () => {
       </div>
       <div className="cart-bottom">
         <div className="cart-total">
-          <h2>Cart Total</h2>
+          <h2 className="cart-total-heading">Cart Total</h2>
           <div>
             <div className="cart-total-details">
-              <p>Subtotal</p>
-              <p>${getTotalCartAmount()}</p>
+              <p className="cart-subtotal">Subtotal</p>
+              <p className="cart-subtotal">₹{getTotalCartAmount()}</p>
             </div>
             <hr />
             <div className="cart-total-details">
-              <p>Delivery Free</p>
-              <p>${getTotalCartAmount() === 0 ? 0 : deliveryFee}</p>
+              <p className="cart-subtotal">Delivery Free</p>
+              <p className="cart-subtotal">₹{getTotalCartAmount() === 0 ? 0 : deliveryFee}</p>
             </div>
             <hr />
             <div className="cart-total-details">
-              <b>Total</b>
-              <b>
-                $
+              <b className="final-total">Total</b>
+              <b className="final-total">
+              ₹
                 {getTotalCartAmount() === 0
                   ? 0
                   : getTotalCartAmount() + deliveryFee}
@@ -96,7 +96,7 @@ const Cart = () => {
         </div>
         <div className="cart-promocode">
           <div>
-            <p>If you have a promocode, Enter it here</p>
+            <p className="promocode-heading">If you have a promocode, Enter it here</p>
             <div className="cart-promocode-input">
               <input type="text" placeholder="Promo Code" />
               <button>Submit</button>

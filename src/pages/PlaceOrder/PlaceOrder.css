@@ -29,6 +29,7 @@
   font-size: 30px;
   font-weight: 600;
   margin-bottom: 20px;
+  color: var(--dark);
 }
 
 .place-order-left input {
@@ -52,6 +53,14 @@
 
 .place-order .cart-total button {
   margin: 30px 0;
+}
+
+.items-purchased{
+  color: var(--dark);
+}
+
+.final-total{
+  color: rgb(43, 42, 42);
 }
 
 @media (max-width: 900px) {

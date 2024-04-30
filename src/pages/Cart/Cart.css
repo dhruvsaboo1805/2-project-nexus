@@ -6,12 +6,18 @@
   display: grid;
   grid-template-columns: 0.8fr 1.5fr 1fr 1fr 1fr 0.5fr;
   align-items: center;
-  color: var(--gray);
   font-size: max(1vw, 12px);
+}
+
+.tags {
+  color: var(--gray);
 }
 
 .cart-items-item {
   margin: 10px 0;
+}
+
+.tags-cart{
   color: var(--dark);
 }
 
@@ -51,9 +57,16 @@
   gap: 20px;
 }
 
+.cart-total-heading{
+  color: black;
+}
+
 .cart-total-details {
   display: flex;
   justify-content: space-between;
+}
+
+.cart-subtotal{
   color: var(--gray);
 }
 
@@ -81,8 +94,12 @@
   flex: 1;
 }
 
-.card-promocode p {
+.promocode-heading{
   color: var(--gray);
+}
+
+.final-total{
+  color: rgb(43, 42, 42);
 }
 
 .cart-promocode-input {

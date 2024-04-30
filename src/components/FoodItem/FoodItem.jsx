@@ -24,7 +24,7 @@ const FoodItem = ({ id, name, price, description, image }) => {
               alt="remove_icon_red"
               onClick={() => removeFromCart(id)}
             />
-            <p>{cartItems[id]}</p>
+            <p className="item-count">{cartItems[id]}</p>
             <img
               src={assets.add_icon_green}
               alt="add_icon_green"
@@ -39,7 +39,7 @@ const FoodItem = ({ id, name, price, description, image }) => {
           <img src={assets.rating_starts} alt="rating_starts" />
         </div>
         <p className="food-item-desc">{description}</p>
-        <p className="food-item-price">${price}</p>
+        <p className="food-item-price">₹{price}</p>
       </div>
     </div>
   );
