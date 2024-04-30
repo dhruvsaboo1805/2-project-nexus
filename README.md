@@ -1,70 +1,80 @@
-# Getting Started with Create React App
+# React Food Delivery App with Authentication
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This food delivery web application is designed to provide users with a convenient and seamless experience when ordering food online. Built using React.js and Firebase authentication, the app offers a range of features to enhance the user experience and streamline the ordering process.
 
-## Available Scripts
+## 🚀 Live Demo <a name="live-demo"></a>
 
-In the project directory, you can run:
+[Live Demo](https://2-project-nexus.vercel.app/) 
 
-### `npm start`
+### Tech Stack <a name="tech-stack"></a>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+  <summary>Front-End</summary>
+  <ul>
+    <li><a href="https://reactjs.org/">React-js</a></li>
+    <li><a href="https://legacy.reactjs.org/docs/context.html">Context ReactJs</a></li>
+     <li><a href="https://reactrouter.com/en/main">React-Router-DOM</a></li>
+  </ul>
+  <summary>Back-End</summary>
+  <ul>
+    <li><a href="https://firebase.google.com/docs">Firebase</a></li>
+    <li><a href="https://firebase.google.com/docs/auth/web/google-signin">Firebase-Google-Auth</a></li>
+    <li><a href="https://firebase.google.com/docs/auth/web/facebook-login">Firebase-Facebook-Auth</a></li>
+  </ul>
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Features
+<h3>User Authentication:</h3>
+<p>Utilizing Firebase Authentication, users can create accounts, log in securely, and manage their profiles.</p>
 
-### `npm test`
+<h3>Browse and Order:</h3>
+<p>Users can browse through a diverse selection of food items, view detailed descriptions and images, and add desired items to their cart.</p>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<h3>Cart Management:</h3>
+<p>The app allows users to easily manage their cart, adjust quantities, and remove items as needed before placing an order.</p>
 
-### `npm run build`
+<h2>User Interface Video</h2>
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+<h2>User Interface</h2>
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## 💻 Getting Started <a name="getting-started"></a>
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Prerequisites
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+In order to run this project you need:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+* GitHub
+* Code Editor
 
-## Learn More
+### Setup
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Clone this repository to your desired folder:
+<code>
+  git clone https://github.com/dhruvsaboo1805/1-project-nexus.git
+</code>
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
+### Install
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Install this project with:
 
-### Analyzing the Bundle Size
+* npm install
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-### Making a Progressive Web App
+### Run tests
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Coming soon
 
-### Advanced Configuration
+### Deployment <a name="deployment"></a>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+You can deploy this project using: GitHub Pages or render or vercel or netlify
 
-### Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### Contributing
 
-### `npm run build` fails to minify
+Contributions are welcome! If you have any ideas for improvements or new features, feel free to open an issue or submit a pull request.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## 📝 License <a name="license"></a>
+
+This project is [MIT](./LICENSE) licensed.
