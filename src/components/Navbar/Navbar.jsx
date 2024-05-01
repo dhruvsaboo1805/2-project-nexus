@@ -82,7 +82,7 @@ const Navbar = ({ isNavbarVisible, toggleNavbarVisibility }) => {
         </a>
       </ul>
       <div className="navbar-right">
-        <img src={assets.search_icon} alt="search_icon" />
+        {/* <img src={assets.search_icon} alt="search_icon" /> */}
         <div className="navbar-basket-icon">
           <Link to="/cart">
             <img src={assets.basket_icon} alt="basket_icon" />
