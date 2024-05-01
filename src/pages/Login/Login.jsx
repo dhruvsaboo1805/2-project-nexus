@@ -9,13 +9,13 @@ import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import "./Login.css";
 
-const Login = ({setIsFooterVisible , setIsNavbarVisible}) => {
+const Login = () => {
     const [loginactive, setLoginActive] = useState(false);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [value, setvalue] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
-    const [isErrorShown, setIsErrorShown] = useState(false); // Track if error toast has been shown
+    const [isErrorShown, setIsErrorShown] = useState(false); 
     const navigate = useNavigate();
 
     const handleClick = () => {
@@ -78,7 +78,7 @@ const Login = ({setIsFooterVisible , setIsNavbarVisible}) => {
                     setIsErrorShown(true);
                     setErrorMessage("Invalid credentials. Please try again.");
                 } else {
-                    setErrorMessage(err.message); // For other errors
+                    setErrorMessage(err.message); 
                 }
                 setEmail("");
                 setPassword("");
@@ -89,13 +89,10 @@ const Login = ({setIsFooterVisible , setIsNavbarVisible}) => {
         fbAuthProvider.setCustomParameters({ display: 'popup' });
         signInWithPopup(database, fbAuthProvider)
             .then((userCredential) => {
-                // Authentication successful, navigate to the homepage
                 navigate("/");
             })
             .catch((error) => {
-                // Handle any errors that occur during authentication
                 console.error("Facebook authentication error:", error);
-                // Optionally, display an error message to the user
                 toast.error("Failed to authenticate with Facebook. Please try again.");
             });
     }
@@ -105,8 +102,6 @@ const Login = ({setIsFooterVisible , setIsNavbarVisible}) => {
         const unsubscribe = onAuthStateChanged(database, (user) => {
             if (user) {
                 setvalue(user.email);
-                setIsFooterVisible(true);
-                setIsNavbarVisible(true);
             } else {
                 setvalue(null);
             }
@@ -143,7 +138,7 @@ const Login = ({setIsFooterVisible , setIsNavbarVisible}) => {
                                 <div className="line"></div>
                             </div>
                             <div className="or-login-icons">
-                                {!value && (
+                                {(
                                     <button className="login-btn" onClick={handleClickGoogleAuth}>
                                         <FaGoogle />
                                     </button>
