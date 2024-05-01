@@ -18,11 +18,10 @@ const Navbar = ({ isNavbarVisible, toggleNavbarVisibility }) => {
   
 
   useEffect(() => {
-    // Check if the user is authenticated
     const unsubscribe = database.onAuthStateChanged((user) => {
-      setIsAuthenticated(!!user); // Set isAuthenticated based on whether user exists
+      setIsAuthenticated(!!user); 
     });
-    return unsubscribe; // Cleanup function
+    return unsubscribe; 
   }, []);
 
   const handleClick = () => {
@@ -31,9 +30,9 @@ const Navbar = ({ isNavbarVisible, toggleNavbarVisibility }) => {
       // If user is authenticated, sign out
       signOut(database)
         .then(() => {
-          setIsAuthenticated(false); // Set isAuthenticated to false after sign out
+          setIsAuthenticated(false); 
           toggleNavbarVisibility(true); 
-          navigate("/"); // Navigate to home page after sign out
+          navigate("/"); 
         })
         .catch((error) => {
           console.error("Error signing out:", error);
@@ -82,7 +81,6 @@ const Navbar = ({ isNavbarVisible, toggleNavbarVisibility }) => {
         </a>
       </ul>
       <div className="navbar-right">
-        {/* <img src={assets.search_icon} alt="search_icon" /> */}
         <div className="navbar-basket-icon">
           <Link to="/cart">
             <img src={assets.basket_icon} alt="basket_icon" />

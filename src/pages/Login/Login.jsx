@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { FaLock, FaUser } from "react-icons/fa";
+import { FaLock } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { FaGoogle } from "react-icons/fa";
 import { FaFacebookF } from "react-icons/fa";

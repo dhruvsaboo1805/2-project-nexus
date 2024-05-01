@@ -29,20 +29,6 @@ code {
   --gray: #676767;
 }
 
-.app {
- width: 85%;
- margin: 0 auto;
-}
-
-/* .homepage {
-  width: 85%;
-  margin: auto;
-}
-
-.login-page {
-  width: 100%;
-  margin: auto;
-} */
 
 a {
   text-decoration: none;
